@@ -17,22 +17,31 @@ const MemeForm = () => {
     });
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setMeme((prevObj) => {
+      return { ...prevObj, [name]: value };
+    });
+  };
+
   return (
     <main>
       <div className="mx-auto mt-20 flex w-10/12 flex-wrap justify-between">
         <input
           className="h-[35px] w-5/12 rounded-md border border-gray-400 px-2"
           type="text"
-          name=""
-          id=""
+          name="topText"
           placeholder="Top text"
+          onChange={handleChange}
+          value={meme.topText}
         />
         <input
           className="h-[35px] w-5/12 rounded-md border border-gray-400 px-2"
           type="text"
-          name=""
-          id=""
+          name="bottomText"
           placeholder="Bottom text"
+          onChange={handleChange}
+          value={meme.bottomText}
         />
         <button
           className="mt-10  w-full rounded-md border bg-gradient-to-r from-[#672280] to-[#A626D3] px-4 py-2 text-white"
@@ -45,10 +54,10 @@ const MemeForm = () => {
       <div className="relative mt-10">
         <img className="mx-auto" src={meme.randomImage} alt="" />
         <h2 className="drop-shadow-a absolute top-0 w-4/5 translate-x-20 py-3 text-center text-2xl uppercase tracking-wide text-white shadow-black drop-shadow-2xl">
-          One does not simply
+          {meme.topText}
         </h2>
         <h2 className="absolute bottom-0 w-4/5 translate-x-20 py-3 text-center text-2xl uppercase tracking-wide text-white shadow-black drop-shadow-2xl ">
-          Walk into Mordor
+          {meme.bottomText}
         </h2>
       </div>
     </main>
