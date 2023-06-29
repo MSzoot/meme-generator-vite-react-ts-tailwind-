@@ -7,22 +7,18 @@ const MemeForm = () => {
     randomImage: 'http://i.imgflip.com/1bij.jpg',
   });
 
-  const [allMemeImages, setAllMemeImages] = useState({
-    data: {
-      memes: [{ url: '' }],
-    },
-  });
+  const [allMemeImages, setAllMemeImages] = useState([]);
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
       .then((res) => res.json())
-      .then((data) => setAllMemeImages(data));
+      .then((data) => setAllMemeImages(data.data.memes));
   }, []);
 
   const getNewImg = () => {
-    const random = Math.floor(Math.random() * allMemeImages.data.memes.length);
+    const random = Math.floor(Math.random() * allMemeImages.length);
     setMeme((prevObj) => {
-      return { ...prevObj, randomImage: allMemeImages.data.memes[random].url };
+      return { ...prevObj, randomImage: allMemeImages[random].url };
     });
   };
 
